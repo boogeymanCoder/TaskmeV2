@@ -1,0 +1,26 @@
+{
+  "name": "taskmev3",
+  "version": "1.0.0",
+  "description": "One time part-time job hiring site",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+  },
+  "keywords": [
+    "taskme",
+    "part-time",
+    "job"
+  ],
+  "author": "cashew",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.14"
+  }
+}
