@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const Account = require("../../models/account");
 
-router.post("/new", async (req, res) => {
+router.post("/", async (req, res) => {
   const account = new Account({
     username: req.body.username,
     password: await bcrypt.hash(req.body.password, 10),
@@ -37,5 +37,7 @@ router.get("/username/:username", async (req, res) => {
 
   res.json(account);
 });
+
+router.get("/");
 
 module.exports = router;
