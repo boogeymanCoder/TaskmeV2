@@ -39,6 +39,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // TODO add api authentication
+// TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
 
@@ -67,6 +68,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 // TODO add api authentication
+// TODO add api authorization
 router.delete("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
 

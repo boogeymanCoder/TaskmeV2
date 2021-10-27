@@ -56,6 +56,7 @@ router.get("/username/:username", async (req, res) => {
 });
 
 // TODO add api authentication
+// TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
@@ -85,6 +86,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 // TODO add api authentication
+// TODO add api authorization
 router.delete("/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
