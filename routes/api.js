@@ -13,4 +13,7 @@ router.use("/recoveryOtp", recoveryOtpRouter);
 const taskRouter = require("./task");
 router.use("/task", taskRouter);
 
+const applicationRouter = require("./application");
+router.use("/application", applicationRouter);
+
 module.exports = router;
