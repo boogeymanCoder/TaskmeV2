@@ -1,3 +1,5 @@
+# node installation modules
 node_modules
 
+# development environmental variables
 .env
