@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const Account = require("../models/account");
-const AccountNotFound = require("./error").AccountNotFoundError;
+const AccountNotFoundError = require("./error").AccountNotFoundError;
 
 router.post("/", async (req, res) => {
   const account = new Account({
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 router.get("/id/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
-  if (otp === null) {
+  if (account === null) {
     console.log(AccountNotFoundError);
     return res.status(404).send(AccountNotFoundError);
   }
@@ -41,7 +41,7 @@ router.get("/id/:id", async (req, res) => {
 router.get("/username/:username", async (req, res) => {
   const account = await Account.findOne({ username: req.params.username });
 
-  if (otp === null) {
+  if (account === null) {
     console.log(AccountNotFoundError);
     return res.status(404).send(AccountNotFoundError);
   }
@@ -53,7 +53,7 @@ router.get("/username/:username", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
-  if (otp === null) {
+  if (account === null) {
     console.log(AccountNotFoundError);
     return res.status(404).send(AccountNotFoundError);
   }
@@ -82,7 +82,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
-  if (otp === null) {
+  if (account === null) {
     console.log(AccountNotFoundError);
     return res.status(404).send(AccountNotFoundError);
   }
