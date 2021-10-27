@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
     });
 });
 
+// TODO add api authentication
 router.get("/id/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
@@ -42,6 +43,7 @@ router.get("/id/:id", async (req, res) => {
   res.json(account);
 });
 
+// TODO add api authentication
 router.get("/username/:username", async (req, res) => {
   const account = await Account.findOne({ username: req.params.username });
 
@@ -92,7 +94,7 @@ router.delete("/:id", async (req, res) => {
   }
 
   await Account.findByIdAndDelete(account._id)
-    .then(() => {
+    .then(async () => {
       console.log("Account Deletion Successful");
 
       await VerificationOtp.deleteOne({ owner: account._id })
