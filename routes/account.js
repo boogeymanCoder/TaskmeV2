@@ -3,6 +3,10 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const Account = require("../models/account");
 const AccountNotFoundError = require("./error").AccountNotFoundError;
+const VerificationOtp = require("../models/otp").verificationOtp;
+const RecoveryOtp = require("../models/otp").recoveryOtp;
+const account = require("../models/account");
+const { verificationOtp } = require("../models/otp");
 
 router.post("/", async (req, res) => {
   const account = new Account({
@@ -87,10 +91,18 @@ router.delete("/:id", async (req, res) => {
     return res.status(404).send(AccountNotFoundError);
   }
 
-  await account
-    .delete()
+  await Account.findByIdAndDelete(account._id)
     .then(() => {
       console.log("Account Deletion Successful");
+
+      await VerificationOtp.deleteOne({ owner: account._id })
+        .then(() => console.log("Otp Deletion Successful"))
+        .catch((err) => console.log("Otp Deletion Failed, Cause:", err));
+
+      await RecoveryOtp.deleteOne({ owner: account._id })
+        .then(() => console.log("Otp Deletion Successful"))
+        .catch((err) => console.log("Otp Deletion Failed, Cause:", err));
+
       res.json(account);
     })
     .catch((err) => {
