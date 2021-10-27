@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const Account = require("../models/account");
+const AccountNotFound = require("./error").AccountNotFoundError;
 
 router.post("/", async (req, res) => {
   const account = new Account({
@@ -29,11 +30,21 @@ router.post("/", async (req, res) => {
 router.get("/id/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
+  if (otp === null) {
+    console.log(AccountNotFoundError);
+    return res.status(404).send(AccountNotFoundError);
+  }
+
   res.json(account);
 });
 
 router.get("/username/:username", async (req, res) => {
   const account = await Account.findOne({ username: req.params.username });
+
+  if (otp === null) {
+    console.log(AccountNotFoundError);
+    return res.status(404).send(AccountNotFoundError);
+  }
 
   res.json(account);
 });
@@ -41,6 +52,12 @@ router.get("/username/:username", async (req, res) => {
 // TODO add api authentication
 router.patch("/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
+
+  if (otp === null) {
+    console.log(AccountNotFoundError);
+    return res.status(404).send(AccountNotFoundError);
+  }
+
   account.username = req.body.username ? req.body.username : account.username;
   account.password = req.body.password ? req.body.password : account.password;
   account.email = req.body.email ? req.body.email : account.email;
@@ -64,6 +81,11 @@ router.patch("/:id", async (req, res) => {
 // TODO add api authentication
 router.delete("/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
+
+  if (otp === null) {
+    console.log(AccountNotFoundError);
+    return res.status(404).send(AccountNotFoundError);
+  }
 
   await account
     .delete()

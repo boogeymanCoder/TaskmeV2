@@ -25,11 +25,21 @@ router.post("/", async (req, res) => {
 router.get("/id/:id", async (req, res) => {
   const otp = await Otp.findById(req.params.id);
 
+  if (otp === null) {
+    console.log(RecoveryOtpNotFoundError);
+    return res.status(404).send(RecoveryOtpNotFoundError);
+  }
+
   res.json(await otp.populate("owner"));
 });
 
 router.get("/pin/:pin", async (req, res) => {
   const otp = await Otp.findOne({ pin: req.params.pin });
+
+  if (otp === null) {
+    console.log(RecoveryOtpNotFoundError);
+    return res.status(404).send(RecoveryOtpNotFoundError);
+  }
 
   res.json(await otp.populate("owner"));
 });
