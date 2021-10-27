@@ -21,4 +21,16 @@ router.post("/", async (req, res) => {
     });
 });
 
+router.get("/id/:id", async (req, res) => {
+  const otp = await Otp.findById(req.params.id);
+
+  res.json(await otp.populate("owner"));
+});
+
+router.get("/pin/:pin", async (req, res) => {
+  const otp = await Otp.findOne({ pin: req.params.pin });
+
+  res.json(await otp.populate("owner"));
+});
+
 module.exports = router;
