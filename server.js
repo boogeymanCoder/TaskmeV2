@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
-const apiRouter = require("./routes/api/api");
+const apiRouter = require("./routes/api");
 
 // set up mongodb connection
 mongoose.connect(process.env.DATABASE_URL);
