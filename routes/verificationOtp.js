@@ -54,8 +54,7 @@ function otpRouter(Otp) {
       return res.status(404).send(OtpNotFoundError);
     }
 
-    await otp
-      .delete()
+    await Otp.deleteOne({ _id: otp._id })
       .then(() => {
         console.log("Otp Deletion Successful");
         res.json(otp);
@@ -71,5 +70,5 @@ function otpRouter(Otp) {
 
 module.exports = {
   verificationOtpRouter: otpRouter(verificationOtp),
-  recoveryOtpRouter: otpRouter(verificationOtp),
+  recoveryOtpRouter: otpRouter(recoveryOtp),
 };
