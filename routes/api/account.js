@@ -17,11 +17,11 @@ router.post("/", async (req, res) => {
   await account
     .save()
     .then(() => {
-      console.log("Account Saved");
+      console.log("Account Created");
       res.json(account);
     })
     .catch((err) => {
-      console.log("Account not saved, cause:", err);
+      console.log("Account Not Created, Cause:", err);
       res.status(400).json(err);
     });
 });
@@ -56,7 +56,23 @@ router.patch("/:id", async (req, res) => {
       res.json(account);
     })
     .catch((err) => {
-      console.log("Account update failed, cause:", err);
+      console.log("Account Update Failed, Cause:", err);
+      res.status(404).json(err);
+    });
+});
+
+// TODO add api authentication
+router.delete("/:id", async (req, res) => {
+  const account = await Account.findById(req.params.id);
+
+  await account
+    .delete()
+    .then(() => {
+      console.log("Account Deletion Successful");
+      res.json(account);
+    })
+    .catch((err) => {
+      console.log("Account Deletion Failed, Cause:", err);
       res.status(404).json(err);
     });
 });
