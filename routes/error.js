@@ -4,6 +4,7 @@ const TaskNotFoundError = "Task Not Found";
 const ApplicationNotFoundError = "Application Not Found";
 const InboxNotFoundError = "Inbox Not Found";
 const ConversationNotFoundError = "Conversation Not Found";
+const MessageNotFoundError = "Message Not Found";
 
 module.exports = {
   AccountNotFoundError: AccountNotFoundError,
@@ -12,4 +13,5 @@ module.exports = {
   ApplicationNotFoundError: ApplicationNotFoundError,
   InboxNotFoundError: InboxNotFoundError,
   ConversationNotFoundError: ConversationNotFoundError,
+  MessageNotFoundError: MessageNotFoundError,
 };

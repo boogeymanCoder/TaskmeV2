@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Message = require("../models/message");
+const MessageNotFoundError = require("./error").MessageNotFoundError;
 
 // TODO add api authentication
 // TODO add api authorization
-// TODO clear conversation seenBy
 router.post("/", async (req, res) => {
   const message = new Message({
     sender: req.body.sender,
@@ -20,6 +20,66 @@ router.post("/", async (req, res) => {
     })
     .catch((err) => {
       console.log("Message Creation Failed, Cause:", err);
+      res.status(400).json(err);
+    });
+});
+
+// TODO add api authentication
+// TODO add api authorization
+router.get("/:id", async (req, res) => {
+  const message = await Message.findById(req.params.id);
+
+  if (message === null) {
+    console.log(MessageNotFoundError);
+    return res.status(404).send(MessageNotFoundError);
+  }
+
+  res.json(message);
+});
+
+// TODO add api authentication
+// TODO add api authorization
+router.patch("/:id", async (req, res) => {
+  const message = await Message.findById(req.params.id);
+
+  if (message === null) {
+    console.log(MessageNotFoundError);
+    return res.status(404).send(MessageNotFoundError);
+  }
+
+  message.sender = req.body.sender ? req.body.sender : message.sender;
+  message.message = req.body.message ? req.body.message : message.message;
+  message.date = req.body.date ? req.body.date : message.date;
+
+  await message
+    .save()
+    .then(() => {
+      console.log("Message Update Successful");
+      res.json(message);
+    })
+    .catch((err) => {
+      console.log("Message Update Failed, Cause:", err);
+      res.status(400).json(err);
+    });
+});
+
+// TODO add api authentication
+// TODO add api authorization
+router.delete("/:id", async (req, res) => {
+  const message = await Message.findById(req.params.id);
+
+  if (message === null) {
+    console.log(MessageNotFoundError);
+    return res.status(404).send(MessageNotFoundError);
+  }
+
+  await Message.findByIdAndDelete(req.params.id)
+    .then(() => {
+      console.log("Message Deletion Successful");
+      res.json(message);
+    })
+    .catch((err) => {
+      console.log("Message Deletion Failed, Cause:", err);
       res.status(400).json(err);
     });
 });
