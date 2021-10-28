@@ -24,4 +24,7 @@ router.use("/inbox", inboxRouter);
 const conversationRouter = require("./conversation");
 router.use("/conversation", conversationRouter);
 
+const messageRouter = require("./message");
+router.use("/message", messageRouter);
+
 module.exports = router;
