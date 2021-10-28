@@ -85,6 +85,7 @@ router.patch("/:id", async (req, res) => {
     });
 });
 
+// FIXME is this needed?
 // TODO add api authentication
 // TODO add api authorization
 router.delete("/:id", async (req, res) => {
