@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+// TODO check authorization with jwt
+
 const accountRouter = require("./account");
 router.use("/account", accountRouter);
 
@@ -18,5 +20,8 @@ router.use("/application", applicationRouter);
 
 const inboxRouter = require("./inbox");
 router.use("/inbox", inboxRouter);
+
+const conversationRouter = require("./conversation");
+router.use("/conversation", conversationRouter);
 
 module.exports = router;
