@@ -16,4 +16,7 @@ router.use("/task", taskRouter);
 const applicationRouter = require("./application");
 router.use("/application", applicationRouter);
 
+const inboxRouter = require("./inbox");
+router.use("/inbox", inboxRouter);
+
 module.exports = router;
