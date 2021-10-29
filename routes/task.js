@@ -7,6 +7,8 @@ router.post("/", async (req, res) => {
   const task = new Task({
     employer: req.body.employer,
     name: req.body.name,
+    details: req.body.details,
+    tags: req.body.tags,
     location: req.body.location,
     skill: req.body.skill,
     date: req.body.date,
@@ -51,6 +53,8 @@ router.patch("/:id", async (req, res) => {
 
   task.employer = req.body.employer ? req.body.employer : task.employer;
   task.name = req.body.name ? req.body.name : task.name;
+  task.details = req.body.details ? req.body.details : task.details;
+  task.tags = req.body.tags ? req.body.tags : task.tags;
   task.location = req.body.location ? req.body.location : task.location;
   task.skill = req.body.skill ? req.body.skill : task.skill;
   task.date = req.body.date ? req.body.date : task.date;
