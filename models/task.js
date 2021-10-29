@@ -51,7 +51,5 @@ const taskSchema = new Schema({
     ref: "Conversation",
   },
 });
-// TODO details
-// TODO tags
 
 module.exports = mongoose.model("Task", taskSchema);

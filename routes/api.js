@@ -34,4 +34,7 @@ router.use("/post", postRouter);
 const commentRouter = require("./comment");
 router.use("/comment", commentRouter);
 
+const serviceRouter = require("./service");
+router.use("/service", serviceRouter);
+
 module.exports = router;
