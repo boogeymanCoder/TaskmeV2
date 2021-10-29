@@ -7,7 +7,6 @@ const ConversationNotFoundError = require("./error").ConversationNotFoundError;
 router.post("/", async (req, res) => {
   const conversation = new Conversation({
     members: req.body.members,
-    seenBy: req.body.seenBy,
     messages: req.body.messages,
   });
 
@@ -45,7 +44,6 @@ router.patch("/:id", async (req, res) => {
   conversation.members = req.body.members
     ? req.body.members
     : conversation.members;
-  conversation.seenBy = req.body.seenBy ? req.body.seenBy : conversation.seenBy;
   conversation.messages = req.body.messages
     ? req.body.messages
     : conversation.messages;

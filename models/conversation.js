@@ -6,9 +6,6 @@ const conversationSchema = new Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "Account" }],
     required: true,
   },
-  seenBy: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Account" }],
-  }, // TODO remove and transfer to notification
   messages: {
     type: [{ type: Schema.Types.ObjectId, ref: "Message" }],
   },
