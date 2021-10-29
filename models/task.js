@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// TODO price
 const taskSchema = new Schema({
   employer: {
     type: Schema.Types.ObjectId,
@@ -28,5 +29,7 @@ const taskSchema = new Schema({
     required: true,
   },
 });
+// TODO add ups
+// TODO applications
 
 module.exports = mongoose.model("Task", taskSchema);

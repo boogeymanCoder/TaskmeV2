@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+// TODO notification
+// TODO services
+// TODO offer
 const accountSchema = new mongoose.Schema({
   username: {
     type: String,
