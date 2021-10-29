@@ -3,6 +3,7 @@ const router = express.Router();
 const Comment = require("../models/comment");
 const CommentNotFoundError = require("./error").CommentNotFoundError;
 
+// TODO populate owner
 router.post("/", async (req, res) => {
   const comment = new Comment({
     owner: req.body.owner,

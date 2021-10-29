@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require("../models/post");
 const PostNotFoundError = require("./error").PostNotFoundError;
 
+// TODO populate owner
 router.post("/", async (req, res) => {
   const post = new Post({
     owner: req.body.owner,
