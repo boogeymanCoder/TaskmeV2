@@ -6,6 +6,7 @@ const MessageNotFoundError = require("./error").MessageNotFoundError;
 // TODO add api authorization
 router.post("/", async (req, res) => {
   const message = new Message({
+    replyTo: req.body.replyTo,
     sender: req.body.sender,
     message: req.body.message,
     date: req.body.date,
@@ -42,6 +43,7 @@ router.patch("/:id", async (req, res) => {
     return res.status(404).send(MessageNotFoundError);
   }
 
+  message.replyTo = req.body.replyTo ? req.body.replyTo : req.body.replyTo;
   message.sender = req.body.sender ? req.body.sender : message.sender;
   message.message = req.body.message ? req.body.message : message.message;
   message.date = req.body.date ? req.body.date : message.date;
