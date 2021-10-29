@@ -14,6 +14,5 @@ const conversationSchema = new Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "Message" }],
   },
 });
-// TODO add name
 
 module.exports = mongoose.model("Conversation", conversationSchema);
