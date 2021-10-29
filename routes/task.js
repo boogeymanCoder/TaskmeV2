@@ -11,6 +11,10 @@ router.post("/", async (req, res) => {
     skill: req.body.skill,
     date: req.body.date,
     open: req.body.open,
+    currency: req.body.currency,
+    price: req.body.price,
+    ups: req.body.ups,
+    taskConversation: req.body.taskConversation,
   });
 
   await task
@@ -51,6 +55,12 @@ router.patch("/:id", async (req, res) => {
   task.skill = req.body.skill ? req.body.skill : task.skill;
   task.date = req.body.date ? req.body.date : task.date;
   task.open = req.body.open ? req.body.open : task.open;
+  task.currency = req.body.currency ? req.body.currency : task.currency;
+  task.price = req.body.price ? req.body.price : task.price;
+  task.ups = req.body.ups ? req.body.ups : task.ups;
+  task.taskConversation = req.body.taskConversation
+    ? req.body.taskConversation
+    : task.taskConversation;
 
   await task
     .save()

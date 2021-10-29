@@ -27,10 +27,25 @@ const taskSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  currency: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  ups: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Account" }],
+  },
+  taskConversation: {
+    type: Schema.Types.ObjectId,
+    ref: "Conversation",
+  },
 });
+// TODO currency
 // TODO price
 // TODO add ups
-// TODO applications
-// TODO add discussion room
+// TODO add task conversation
 
 module.exports = mongoose.model("Task", taskSchema);
