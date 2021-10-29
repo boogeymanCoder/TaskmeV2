@@ -6,6 +6,7 @@ const ConversationNotFoundError = require("./error").ConversationNotFoundError;
 // TODO add api authorization all routes
 router.post("/", async (req, res) => {
   const conversation = new Conversation({
+    name: req.body.name,
     members: req.body.members,
     messages: req.body.messages,
   });
@@ -41,6 +42,7 @@ router.patch("/:id", async (req, res) => {
     return res.status(404).send(ConversationNotFoundError);
   }
 
+  conversation.name = req.body.name ? req.body.name : conversation.name;
   conversation.members = req.body.members
     ? req.body.members
     : conversation.members;
