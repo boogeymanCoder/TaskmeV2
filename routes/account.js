@@ -106,7 +106,7 @@ router.delete("/:id", async (req, res) => {
         .then(() => console.log("Otp Deletion Successful"))
         .catch((err) => console.log("Otp Deletion Failed, Cause:", err));
 
-      // TODO remove tasks and others on delete
+      // TODO remove references on delete?
 
       res.json(account);
     })

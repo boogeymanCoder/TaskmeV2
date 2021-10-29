@@ -43,9 +43,7 @@ const taskSchema = new Schema({
     ref: "Conversation",
   },
 });
-// TODO currency
-// TODO price
-// TODO add ups
-// TODO add task conversation
+// TODO details
+// TODO tags
 
 module.exports = mongoose.model("Task", taskSchema);
