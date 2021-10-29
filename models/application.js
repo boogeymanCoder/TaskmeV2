@@ -7,6 +7,7 @@ const applicationSchema = new Schema({
     ref: "Task",
     required: true,
   },
+  // TODO remove tasks
   employee: {
     type: Schema.Types.ObjectId,
     ref: "Account",
