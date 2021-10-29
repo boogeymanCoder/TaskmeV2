@@ -5,6 +5,7 @@ const ApplicationNotFoundError = "Application Not Found";
 const InboxNotFoundError = "Inbox Not Found";
 const ConversationNotFoundError = "Conversation Not Found";
 const MessageNotFoundError = "Message Not Found";
+const PostNotFoundError = "Post Not Found";
 
 module.exports = {
   AccountNotFoundError: AccountNotFoundError,
@@ -14,4 +15,5 @@ module.exports = {
   InboxNotFoundError: InboxNotFoundError,
   ConversationNotFoundError: ConversationNotFoundError,
   MessageNotFoundError: MessageNotFoundError,
+  PostNotFoundError: PostNotFoundError,
 };

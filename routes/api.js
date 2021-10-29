@@ -27,4 +27,7 @@ router.use("/conversation", conversationRouter);
 const messageRouter = require("./message");
 router.use("/message", messageRouter);
 
+const postRouter = require("./post");
+router.use("/post", postRouter);
+
 module.exports = router;
