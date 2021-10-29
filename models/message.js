@@ -20,6 +20,5 @@ const messageSchema = new Schema({
     required: true,
   },
 });
-// TODO replyTo
 
 module.exports = mongoose.model("Message", messageSchema);
