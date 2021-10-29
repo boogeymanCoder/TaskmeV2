@@ -3,7 +3,6 @@ const router = express.Router();
 const Application = require("../models/application");
 const ApplicationNotFoundError = require("./error").ApplicationNotFoundError;
 
-// TODO add api authentication
 router.post("/", async (req, res) => {
   const application = new Application({
     task: req.body.task,
@@ -26,7 +25,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO add api authentication
 router.get("/:id", async (req, res) => {
   const application = await Application.findById(req.params.id);
 
@@ -38,7 +36,6 @@ router.get("/:id", async (req, res) => {
   res.json(await application.populate(["task", "employee"]));
 });
 
-// TODO add api authentication
 // TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const application = await Application.findById(req.params.id);
@@ -72,7 +69,6 @@ router.patch("/:id", async (req, res) => {
     });
 });
 
-// TODO add api authentication
 // TODO add api authorization
 router.delete("/:id", async (req, res) => {
   const application = await Application.findById(req.params.id);
@@ -92,7 +88,5 @@ router.delete("/:id", async (req, res) => {
       res.status(400).json(err);
     });
 });
-
-// TODO CONTINUE
 
 module.exports = router;

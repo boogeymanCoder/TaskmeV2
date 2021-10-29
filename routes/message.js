@@ -3,7 +3,6 @@ const router = express.Router();
 const Message = require("../models/message");
 const MessageNotFoundError = require("./error").MessageNotFoundError;
 
-// TODO add api authentication
 // TODO add api authorization
 router.post("/", async (req, res) => {
   const message = new Message({
@@ -24,8 +23,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO add api authentication
-// TODO add api authorization
 router.get("/:id", async (req, res) => {
   const message = await Message.findById(req.params.id);
 
@@ -37,8 +34,6 @@ router.get("/:id", async (req, res) => {
   res.json(message);
 });
 
-// TODO add api authentication
-// TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const message = await Message.findById(req.params.id);
 
@@ -63,8 +58,6 @@ router.patch("/:id", async (req, res) => {
     });
 });
 
-// TODO add api authentication
-// TODO add api authorization
 router.delete("/:id", async (req, res) => {
   const message = await Message.findById(req.params.id);
 

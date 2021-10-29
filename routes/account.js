@@ -31,7 +31,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO add api authentication
 router.get("/id/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
 
@@ -43,7 +42,6 @@ router.get("/id/:id", async (req, res) => {
   res.json(account);
 });
 
-// TODO add api authentication
 router.get("/username/:username", async (req, res) => {
   const account = await Account.findOne({ username: req.params.username });
 
@@ -108,8 +106,7 @@ router.delete("/:id", async (req, res) => {
         .then(() => console.log("Otp Deletion Successful"))
         .catch((err) => console.log("Otp Deletion Failed, Cause:", err));
 
-      // TODO remove tasks on delete
-      // TODO remove applications on delete
+      // TODO remove tasks and others on delete
 
       res.json(account);
     })

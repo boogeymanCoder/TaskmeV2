@@ -3,7 +3,6 @@ const router = express.Router();
 const Task = require("../models/task");
 const TaskNotFoundError = require("./error").TaskNotFoundError;
 
-// TODO add api authentication
 router.post("/", async (req, res) => {
   const task = new Task({
     employer: req.body.employer,
@@ -26,7 +25,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO add api authentication
 router.get("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
 
@@ -38,7 +36,6 @@ router.get("/:id", async (req, res) => {
   res.json(await task.populate("employer"));
 });
 
-// TODO add api authentication
 // TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
@@ -67,7 +64,6 @@ router.patch("/:id", async (req, res) => {
     });
 });
 
-// TODO add api authentication
 // TODO add api authorization
 router.delete("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);

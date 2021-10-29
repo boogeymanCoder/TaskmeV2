@@ -3,8 +3,7 @@ const router = express.Router();
 const Inbox = require("../models/inbox");
 const InboxNotFoundError = require("./error").InboxNotFoundError;
 
-// TODO add api authentication
-// TODO add api authorization
+// TODO add api authorization to all routes.
 router.post("/", async (req, res) => {
   const inbox = new Inbox({
     owner: req.body.owner,
@@ -23,8 +22,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO add api authentication
-// TODO add api authorization
 router.get("/:owner", async (req, res) => {
   const inbox = await Inbox.findOne({ owner: req.params.owner });
 
@@ -36,8 +33,6 @@ router.get("/:owner", async (req, res) => {
   res.json(inbox);
 });
 
-// TODO add api authentication
-// TODO add api authorization
 router.patch("/:owner", async (req, res) => {
   const inbox = await Inbox.findOne({ owner: req.params.owner });
 
