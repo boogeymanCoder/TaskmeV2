@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // TODO check authorization with jwt
+// TODO check authentication to private routes
 
 const accountRouter = require("./account");
 router.use("/account", accountRouter);

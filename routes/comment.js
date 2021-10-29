@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/comment");
+const CommentNotFoundError = require("./error").CommentNotFoundError;
 
 router.post("/", async (req, res) => {
   const comment = new Comment({
@@ -19,9 +20,64 @@ router.post("/", async (req, res) => {
     })
     .catch((err) => {
       console.log("Comment Creation Failed, Cause: " + err);
+      res.status(400).json(err);
     });
 });
 
-// TODO CONTINUE
+router.get("/:id", async (req, res) => {
+  const comment = await Comment.findById(req.params.id);
+
+  if (comment === null) {
+    console.log(CommentNotFoundError);
+    res.status(404).send(CommentNotFoundError);
+  }
+
+  res.json(comment);
+});
+
+router.patch("/:id", async (req, res) => {
+  const comment = await Comment.findById(req.params.id);
+
+  if (comment === null) {
+    console.log(CommentNotFoundError);
+    res.status(404).send(CommentNotFoundError);
+  }
+
+  comment.owner = req.body.owner ? req.body.owner : comment.owner;
+  comment.replies = req.body.replies ? req.body.replies : comment.replies;
+  comment.body = req.body.body ? req.body.body : comment.body;
+  comment.date = req.body.date ? req.body.date : comment.date;
+  comment.ups = req.body.ups ? req.body.ups : comment.ups;
+
+  await comment
+    .save()
+    .then(() => {
+      console.log("Comment Updated Successfully");
+      res.json(comment);
+    })
+    .catch((err) => {
+      console.log("Comment Updated Failed, Cause:", err);
+      res.status(400).json(err);
+    });
+});
+
+router.delete("/:id", async (req, res) => {
+  const comment = await Comment.findById(req.params.id);
+
+  if (comment === null) {
+    console.log(CommentNotFoundError);
+    res.status(404).send(CommentNotFoundError);
+  }
+
+  await Comment.findByIdAndDelete(req.params.id)
+    .then(() => {
+      console.log("Comment Deletion Successful");
+      res.json(comment);
+    })
+    .catch((err) => {
+      console.log("Comment Deletion Failed, Cause:", err);
+      res.status(400).json(err);
+    });
+});
 
 module.exports = router;
