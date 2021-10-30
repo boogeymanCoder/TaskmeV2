@@ -3,7 +3,6 @@ const router = express.Router();
 const Message = require("../models/message");
 const MessageNotFoundError = require("./error").MessageNotFoundError;
 
-// TODO populate sender
 // TODO add api authorization
 router.post("/", async (req, res) => {
   const message = new Message({

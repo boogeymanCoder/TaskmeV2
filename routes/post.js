@@ -16,9 +16,9 @@ router.post("/", async (req, res) => {
 
   post
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Post Creation Successful");
-      res.json(post);
+      res.json(await post.populate("owner"));
     })
     .catch((err) => {
       console.log("Post Creation Failed, Cause:", err);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
     res.status(400).send(PostNotFoundError);
   }
 
-  res.json(post);
+  res.json(await post.populate("owner"));
 });
 
 router.patch("/:id", async (req, res) => {
@@ -54,9 +54,9 @@ router.patch("/:id", async (req, res) => {
 
   post
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Post Update Successful");
-      res.json(post);
+      res.json(await post.populate("owner"));
     })
     .catch((err) => {
       console.log("Post Update Failed, Cause: ", err);
@@ -73,9 +73,9 @@ router.delete("/:id", async (req, res) => {
   }
 
   await Post.findByIdAndDelete(req.params.id)
-    .then(() => {
+    .then(async () => {
       console.log("Post Deletion Successful");
-      res.json(post);
+      res.json(await post.populate("owner"));
     })
     .catch((err) => {
       console.log("Post Deletion Failed, Cause:", err);
