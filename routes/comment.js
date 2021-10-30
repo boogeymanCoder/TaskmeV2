@@ -3,7 +3,6 @@ const router = express.Router();
 const Comment = require("../models/comment");
 const CommentNotFoundError = require("./error").CommentNotFoundError;
 
-// TODO populate owner
 router.post("/", async (req, res) => {
   const comment = new Comment({
     owner: req.body.owner,
@@ -15,9 +14,9 @@ router.post("/", async (req, res) => {
 
   comment
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Comment Creation Successful");
-      res.json(comment);
+      res.json(await comment.populate("owner"));
     })
     .catch((err) => {
       console.log("Comment Creation Failed, Cause: " + err);
@@ -33,7 +32,7 @@ router.get("/:id", async (req, res) => {
     res.status(404).send(CommentNotFoundError);
   }
 
-  res.json(comment);
+  res.json(await comment.populate("owner"));
 });
 
 router.patch("/:id", async (req, res) => {
@@ -52,9 +51,9 @@ router.patch("/:id", async (req, res) => {
 
   await comment
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Comment Updated Successfully");
-      res.json(comment);
+      res.json(await comment.populate("owner"));
     })
     .catch((err) => {
       console.log("Comment Updated Failed, Cause:", err);
@@ -71,9 +70,9 @@ router.delete("/:id", async (req, res) => {
   }
 
   await Comment.findByIdAndDelete(req.params.id)
-    .then(() => {
+    .then(async () => {
       console.log("Comment Deletion Successful");
-      res.json(comment);
+      res.json(await comment.populate("owner"));
     })
     .catch((err) => {
       console.log("Comment Deletion Failed, Cause:", err);
