@@ -3,7 +3,6 @@ const router = express.Router();
 const Inbox = require("../models/inbox");
 const InboxNotFoundError = require("./error").InboxNotFoundError;
 
-// TODO populate owner
 // TODO add api authorization to all routes.
 router.post("/", async (req, res) => {
   const inbox = new Inbox({

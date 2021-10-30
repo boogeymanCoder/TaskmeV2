@@ -15,9 +15,9 @@ router.post("/", async (req, res) => {
 
   await message
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Message Creation Successful");
-      res.json(message);
+      res.json(await message.populate("sender"));
     })
     .catch((err) => {
       console.log("Message Creation Failed, Cause:", err);
@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
     return res.status(404).send(MessageNotFoundError);
   }
 
-  res.json(message);
+  res.json(await message.populate("sender"));
 });
 
 router.patch("/:id", async (req, res) => {
@@ -51,9 +51,9 @@ router.patch("/:id", async (req, res) => {
 
   await message
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Message Update Successful");
-      res.json(message);
+      res.json(await message.populate("sender"));
     })
     .catch((err) => {
       console.log("Message Update Failed, Cause:", err);
@@ -70,9 +70,9 @@ router.delete("/:id", async (req, res) => {
   }
 
   await Message.findByIdAndDelete(req.params.id)
-    .then(() => {
+    .then(async () => {
       console.log("Message Deletion Successful");
-      res.json(message);
+      res.json(await message.populate("sender"));
     })
     .catch((err) => {
       console.log("Message Deletion Failed, Cause:", err);
