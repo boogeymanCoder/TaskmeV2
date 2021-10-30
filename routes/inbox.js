@@ -13,9 +13,9 @@ router.post("/", async (req, res) => {
 
   await inbox
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Inbox Creation Successful");
-      res.json(inbox);
+      res.json(await inbox.populate("owner"));
     })
     .catch((err) => {
       console.log("Inbox Creation Failed, Cause:", err);
@@ -31,8 +31,10 @@ router.get("/:owner", async (req, res) => {
     return res.status(404).send(InboxNotFoundError);
   }
 
-  res.json(inbox);
+  res.json(await inbox.populate("owner"));
 });
+
+// TODO add conversation route
 
 router.patch("/:owner", async (req, res) => {
   const inbox = await Inbox.findOne({ owner: req.params.owner });
@@ -49,9 +51,9 @@ router.patch("/:owner", async (req, res) => {
 
   await inbox
     .save()
-    .then(() => {
+    .then(async () => {
       console.log("Inbox Update Successful");
-      res.json(inbox);
+      res.json(await inbox.populate("owner"));
     })
     .catch((err) => {
       console.log("Inbox Update Failed, Cause:", err);
