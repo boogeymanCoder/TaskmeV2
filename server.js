@@ -13,9 +13,6 @@ mongoose.connect(process.env.DATABASE_URL);
 
 app.use(express.json());
 app.use("/api", apiRouter);
-app.get("/", (req, res) => {
-  res.send("It's working!");
-});
 
 app.listen(process.env.PORT, () =>
   console.log("Listening at port", process.env.PORT)

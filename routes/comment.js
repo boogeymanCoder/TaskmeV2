@@ -24,13 +24,12 @@ router.post("/", async (req, res) => {
     });
 });
 
-// FIXME return on failure
 router.get("/:id", async (req, res) => {
   const comment = await Comment.findById(req.params.id);
 
   if (comment === null) {
     console.log(CommentNotFoundError);
-    res.status(404).send(CommentNotFoundError);
+    return res.status(404).send(CommentNotFoundError);
   }
 
   res.json(await comment.populate("owner"));
@@ -41,7 +40,7 @@ router.patch("/:id", async (req, res) => {
 
   if (comment === null) {
     console.log(CommentNotFoundError);
-    res.status(404).send(CommentNotFoundError);
+    return res.status(404).send(CommentNotFoundError);
   }
 
   comment.owner = req.body.owner ? req.body.owner : comment.owner;
@@ -67,7 +66,7 @@ router.delete("/:id", async (req, res) => {
 
   if (comment === null) {
     console.log(CommentNotFoundError);
-    res.status(404).send(CommentNotFoundError);
+    return res.status(404).send(CommentNotFoundError);
   }
 
   await Comment.findByIdAndDelete(req.params.id)
