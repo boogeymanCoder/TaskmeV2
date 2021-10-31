@@ -33,7 +33,7 @@ router.get("/:owner", async (req, res) => {
   res.json(await inbox.populate("owner"));
 });
 
-router.put("/:owner/conversations/", async (req, res) => {
+router.put("/:owner/conversations", async (req, res) => {
   const inbox = await Inbox.findOne({ owner: req.params.owner });
 
   if (inbox === null) {
