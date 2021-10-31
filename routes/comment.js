@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
     });
 });
 
+// FIXME return on failure
 router.get("/:id", async (req, res) => {
   const comment = await Comment.findById(req.params.id);
 

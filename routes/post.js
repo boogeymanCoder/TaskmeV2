@@ -30,10 +30,33 @@ router.get("/:id", async (req, res) => {
 
   if (post === null) {
     console.log(PostNotFoundError);
-    res.status(400).send(PostNotFoundError);
+    return res.status(400).send(PostNotFoundError);
   }
 
   res.json(await post.populate("owner"));
+});
+
+router.put("/:id/comments/", async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  if (post === null) {
+    console.log(PostNotFoundError);
+    return res.status(400).send(PostNotFoundError);
+  }
+
+  const comment = req.body.comment;
+
+  post.comments.push(comment._id);
+
+  post
+    .save()
+    .then(async () => {
+      console.log("Comment Put Successfully");
+      res.json(await post.populate("owner"));
+    })
+    .catch((err) => {
+      console.log("Comment Put Failed, Cause:", err);
+    });
 });
 
 router.patch("/:id", async (req, res) => {
@@ -41,7 +64,7 @@ router.patch("/:id", async (req, res) => {
 
   if (post === null) {
     console.log(PostNotFoundError);
-    res.status(400).send(PostNotFoundError);
+    return res.status(400).send(PostNotFoundError);
   }
 
   post.owner = req.body.owner ? req.body.owner : post.owner;
@@ -68,7 +91,7 @@ router.delete("/:id", async (req, res) => {
 
   if (post === null) {
     console.log(PostNotFoundError);
-    res.status(400).send(PostNotFoundError);
+    return res.status(400).send(PostNotFoundError);
   }
 
   await Post.findByIdAndDelete(req.params.id)
