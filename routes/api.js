@@ -41,4 +41,7 @@ router.use("/service", serviceRouter);
 const offerRouter = require("./offer");
 router.use("/offer", offerRouter);
 
+const scheduleRouter = require("./schedule");
+router.use("/schedule", scheduleRouter);
+
 module.exports = router;
