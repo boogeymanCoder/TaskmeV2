@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+// FIXME add put api for models with array fields
 // TODO check authorization with jwt
 // TODO check authentication to private routes
 
@@ -36,5 +37,8 @@ router.use("/comment", commentRouter);
 
 const serviceRouter = require("./service");
 router.use("/service", serviceRouter);
+
+const offerRouter = require("./offer");
+router.use("/offer", offerRouter);
 
 module.exports = router;

@@ -8,6 +8,7 @@ const MessageNotFoundError = "Message Not Found";
 const PostNotFoundError = "Post Not Found";
 const CommentNotFoundError = "Comment Not Found";
 const ServiceNotFoundError = "Service Not Found";
+const DuplicateOfferError = "Duplicate Offer";
 
 module.exports = {
   AccountNotFoundError: AccountNotFoundError,
@@ -20,4 +21,5 @@ module.exports = {
   PostNotFoundError: PostNotFoundError,
   CommentNotFoundError: CommentNotFoundError,
   ServiceNotFoundError: ServiceNotFoundError,
+  DuplicateOfferError: DuplicateOfferError,
 };
