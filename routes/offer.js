@@ -89,6 +89,5 @@ router.delete("/:id", async (req, res) => {
       res.status(400).json(err);
     });
 });
-// TODO CONTINUE
 
 module.exports = router;
