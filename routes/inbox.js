@@ -33,7 +33,28 @@ router.get("/:owner", async (req, res) => {
   res.json(await inbox.populate("owner"));
 });
 
-// TODO add conversation route
+router.put("/:owner/conversations/", async (req, res) => {
+  const inbox = await Inbox.findOne({ owner: req.params.owner });
+
+  if (inbox === null) {
+    console.log(InboxNotFoundError);
+    return res.status(404).send(InboxNotFoundError);
+  }
+
+  const conversation = req.body.conversation;
+  inbox.conversations.push(conversation._id);
+
+  await inbox
+    .save()
+    .then(async () => {
+      console.log("Conversation Put Successful");
+      res.json(await inbox.populate("owner"));
+    })
+    .catch((err) => {
+      console.log("Conversation Put Failed, Cause:", err);
+      res.status(400).json(err);
+    });
+});
 
 router.patch("/:owner", async (req, res) => {
   const inbox = await Inbox.findOne({ owner: req.params.owner });
@@ -43,7 +64,7 @@ router.patch("/:owner", async (req, res) => {
     return res.status(404).send(InboxNotFoundError);
   }
 
-  inbox.owner = req.body.owner ? req.body.owner : inbox.owner; // FIXME is this needed?
+  inbox.owner = req.body.owner ? req.body.owner : inbox.owner;
   inbox.conversations = req.body.conversations
     ? req.body.conversations
     : inbox.conversations;
