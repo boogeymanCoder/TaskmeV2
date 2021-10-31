@@ -11,6 +11,7 @@ const ServiceNotFoundError = "Service Not Found";
 const DuplicateOfferError = "Duplicate Offer";
 const OfferNotFoundError = "Offer Not Found";
 const ScheduleNotFoundError = "Schedule Not Found";
+const AppointmentNotFoundError = "Appointment Not Found";
 
 module.exports = {
   AccountNotFoundError: AccountNotFoundError,
@@ -26,4 +27,5 @@ module.exports = {
   DuplicateOfferError: DuplicateOfferError,
   OfferNotFoundError: OfferNotFoundError,
   ScheduleNotFoundError: ScheduleNotFoundError,
+  AppointmentNotFoundError: AppointmentNotFoundError,
 };

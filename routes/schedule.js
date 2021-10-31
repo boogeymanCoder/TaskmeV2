@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Schedule = require("../models/schedule");
+const ScheduleNotFoundError = require("./error").ScheduleNotFoundError;
 
 router.post("/", async (req, res) => {
   const schedule = new Schedule({
