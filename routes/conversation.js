@@ -34,6 +34,29 @@ router.get("/:id", async (req, res) => {
   res.json(conversation);
 });
 
+router.put("/:id/members", async (req, res) => {
+  const conversation = await Conversation.findById(req.params.id);
+
+  if (conversation === null) {
+    console.log(ConversationNotFoundError);
+    return res.status(404).send(ConversationNotFoundError);
+  }
+
+  const member = req.body.member;
+  conversation.members.push(member._id);
+
+  await conversation
+    .save()
+    .then(() => {
+      console.log("Message Put Successfully");
+      res.json(conversation);
+    })
+    .catch((err) => {
+      console.log("Message Put Failed, Cause:", err);
+      res.status(400).json(err);
+    });
+});
+
 router.put("/:id/messages", async (req, res) => {
   const conversation = await Conversation.findById(req.params.id);
 
@@ -48,11 +71,11 @@ router.put("/:id/messages", async (req, res) => {
   await conversation
     .save()
     .then(() => {
-      console.log("Message Putt Successful");
+      console.log("Message Put Successful");
       res.json(conversation);
     })
     .catch((err) => {
-      console.log("Message Putt Failed, Cause:", err);
+      console.log("Message Put Failed, Cause:", err);
       res.status(400).send(err);
     });
 });
