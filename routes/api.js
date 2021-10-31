@@ -47,4 +47,7 @@ router.use("/schedule", scheduleRouter);
 const appointmentRouter = require("./appointment");
 router.use("/appointment", appointmentRouter);
 
+const notificationRouter = require("./notification");
+router.use("/notification", notificationRouter);
+
 module.exports = router;
