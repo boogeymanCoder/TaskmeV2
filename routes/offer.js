@@ -7,7 +7,7 @@ const OfferNotFoundError = require("./error").OfferNotFoundError;
 router.post("/", async (req, res) => {
   // check for duplicate offers
   const duplicate = await Offer.findOne({
-    employer: req.body.employer,
+    sender: req.body.sender,
     task: req.body.task,
     service: req.body.service,
   });
@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
   }
 
   const offer = new Offer({
-    employer: req.body.employer,
+    sender: req.body.sender,
     task: req.body.task,
     service: req.body.service,
     accepted: req.body.accepted,
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     .save()
     .then(async () => {
       console.log("Offer Creation Successful");
-      res.json(await offer.populate(["employer", "task", "service"]));
+      res.json(await offer.populate(["sender", "task", "service"]));
     })
     .catch((err) => {
       console.log("Offer Creation Failed, Cause:", err);
@@ -43,7 +43,7 @@ router.get("/:id", async (req, res) => {
     return res.status(404).send(OfferNotFoundError);
   }
 
-  res.json(await offer.populate(["employer", "task", "service"]));
+  res.json(await offer.populate(["sender", "task", "service"]));
 });
 
 router.patch("/:id", async (req, res) => {
@@ -54,7 +54,7 @@ router.patch("/:id", async (req, res) => {
     return res.status(404).send(OfferNotFoundError);
   }
 
-  offer.employer = req.body.employer ? req.body.employer : offer.employer;
+  offer.sender = req.body.sender ? req.body.sender : offer.sender;
   offer.task = req.body.task ? req.body.task : offer.task;
   offer.service = req.body.service ? req.body.service : offer.service;
   offer.accepted = req.body.accepted ? req.body.accepted : offer.accepted;
@@ -63,7 +63,7 @@ router.patch("/:id", async (req, res) => {
     .save()
     .then(async () => {
       console.log("Offer Update Successful");
-      res.json(await offer.populate(["employer", "task", "service"]));
+      res.json(await offer.populate(["sender", "task", "service"]));
     })
     .catch((err) => {
       console.log("Offer Update Failed, Cause:", err);
@@ -82,7 +82,7 @@ router.delete("/:id", async (req, res) => {
   await Offer.findByIdAndDelete(req.params.id)
     .then(async () => {
       console.log("Offer Delete Successful");
-      res.json(await offer.populate(["employer", "task", "service"]));
+      res.json(await offer.populate(["sender", "task", "service"]));
     })
     .catch((err) => {
       console.log("Offer Deletion Failed, Cause:", err);
