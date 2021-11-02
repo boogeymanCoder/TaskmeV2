@@ -37,16 +37,16 @@ router.get("/id/:id", async (req, res) => {
 });
 
 router.get("/employee/:employee", async (req, res) => {
-  const application = await Application.findOne({
+  const applications = await Application.find({
     employee: req.params.employee,
   });
 
-  if (application === null) {
+  if (applications.length <= 0) {
     console.log(ApplicationNotFoundError);
     return res.status(404).send(ApplicationNotFoundError);
   }
 
-  res.json(await application.populate(["task", "employee"]));
+  res.json(applications);
 });
 
 // TODO add api authorization
