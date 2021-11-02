@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     });
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
   const application = await Application.findById(req.params.id);
 
   if (application === null) {
@@ -36,7 +36,19 @@ router.get("/:id", async (req, res) => {
   res.json(await application.populate(["task", "employee"]));
 });
 
-// TODO find by applicant
+router.get("/employee/:employee", async (req, res) => {
+  const application = await Application.findOne({
+    employee: req.params.employee,
+  });
+
+  if (application === null) {
+    console.log(ApplicationNotFoundError);
+    return res.status(404).send(ApplicationNotFoundError);
+  }
+
+  res.json(await application.populate(["task", "employee"]));
+});
+
 // TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const application = await Application.findById(req.params.id);
