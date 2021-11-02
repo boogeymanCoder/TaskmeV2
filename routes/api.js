@@ -53,4 +53,7 @@ router.use("/notification", notificationRouter);
 const rateRouter = require("./rate");
 router.use("/rate", rateRouter);
 
+const ratingRouter = require("./rating");
+router.use("/rating", ratingRouter);
+
 module.exports = router;
