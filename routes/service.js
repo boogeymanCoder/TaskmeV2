@@ -25,6 +25,8 @@ router.post("/", async (req, res) => {
     });
 });
 
+// find by owner
+
 router.get("/:id", async (req, res) => {
   const service = await Service.findById(req.params.id);
 

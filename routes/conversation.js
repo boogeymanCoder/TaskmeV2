@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
     });
 });
 
+// TODO find by member
 router.get("/:id", async (req, res) => {
   const conversation = await Conversation.findById(req.params.id);
 

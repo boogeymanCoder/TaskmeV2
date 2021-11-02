@@ -31,6 +31,8 @@ router.post("/", async (req, res) => {
     });
 });
 
+// TODO find by employer
+
 router.get("/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
 

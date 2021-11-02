@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
     });
 });
 
+// TODO find by owner
 router.get("/:id", async (req, res) => {
   const notification = await Notification.findById(req.params.id);
 

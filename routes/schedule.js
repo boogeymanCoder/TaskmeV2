@@ -22,6 +22,8 @@ router.post("/", async (req, res) => {
     });
 });
 
+// TODO find by owner
+
 router.get("/:id", async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);
 

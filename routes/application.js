@@ -36,6 +36,7 @@ router.get("/:id", async (req, res) => {
   res.json(await application.populate(["task", "employee"]));
 });
 
+// TODO find by applicant
 // TODO add api authorization
 router.patch("/:id", async (req, res) => {
   const application = await Application.findById(req.params.id);
