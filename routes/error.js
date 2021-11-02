@@ -12,6 +12,7 @@ const DuplicateOfferError = "Duplicate Offer";
 const OfferNotFoundError = "Offer Not Found";
 const ScheduleNotFoundError = "Schedule Not Found";
 const AppointmentNotFoundError = "Appointment Not Found";
+const RateNotFoundError = "Rate Not Found";
 
 module.exports = {
   AccountNotFoundError: AccountNotFoundError,
@@ -28,4 +29,5 @@ module.exports = {
   OfferNotFoundError: OfferNotFoundError,
   ScheduleNotFoundError: ScheduleNotFoundError,
   AppointmentNotFoundError: AppointmentNotFoundError,
+  RateNotFoundError: RateNotFoundError,
 };
