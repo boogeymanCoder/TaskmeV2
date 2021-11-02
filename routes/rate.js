@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
     });
 });
 
+// TODO find by owner
 router.get("/:id", async (req, res) => {
   const rate = await Rate.findById(req.params.id);
 
@@ -65,8 +66,7 @@ router.delete("/:id", async (req, res) => {
     return res.status(404).send(RateNotFoundError);
   }
 
-  await rate
-    .delete()
+  await Rate.findByIdAndDelete(req.params.id)
     .then(async () => {
       console.log("Rate Delete Successful");
       res.json(await rate.populate(["from", "to"]));
