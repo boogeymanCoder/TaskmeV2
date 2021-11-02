@@ -50,4 +50,7 @@ router.use("/appointment", appointmentRouter);
 const notificationRouter = require("./notification");
 router.use("/notification", notificationRouter);
 
+const rateRouter = require("./rate");
+router.use("/rate", rateRouter);
+
 module.exports = router;
