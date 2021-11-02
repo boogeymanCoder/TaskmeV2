@@ -26,8 +26,18 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO find by owner
-router.get("/:id", async (req, res) => {
+router.get("/owner/:owner", async (req, res) => {
+  const notification = await Notification.findOne({ owner: req.params.owner });
+
+  if (notification === null) {
+    console.log(NotificationNotFoundError);
+    return res.status(404).send(NotificationNotFoundError);
+  }
+
+  res.json(await notification.populate("owner"));
+});
+
+router.get("/id/:id", async (req, res) => {
   const notification = await Notification.findById(req.params.id);
 
   if (notification === null) {

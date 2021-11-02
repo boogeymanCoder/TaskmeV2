@@ -23,8 +23,20 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO find by member
-router.get("/:id", async (req, res) => {
+router.get("/member/:member", async (req, res) => {
+  const conversations = await Conversation.find({
+    members: { $in: [req.params.member] },
+  });
+
+  if (conversations.length < 1) {
+    console.log(ConversationNotFoundError);
+    return res.status(404).send(ConversationNotFoundError);
+  }
+
+  res.json(conversations);
+});
+
+router.get("/id/:id", async (req, res) => {
   const conversation = await Conversation.findById(req.params.id);
 
   if (conversation === null) {

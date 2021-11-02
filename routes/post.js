@@ -25,7 +25,28 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO find by owner
+router.get("/owner/:owner", async (req, res) => {
+  const posts = await Post.find({ owner: req.params.owner });
+
+  if (posts.length <= 0) {
+    console.log(PostNotFoundError);
+    return res.status(400).send(PostNotFoundError);
+  }
+
+  res.json(posts);
+});
+
+router.get("/id/:id", async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  if (post === null) {
+    console.log(PostNotFoundError);
+    return res.status(400).send(PostNotFoundError);
+  }
+
+  res.json(await post.populate("owner"));
+});
+
 router.get("/:id", async (req, res) => {
   const post = await Post.findById(req.params.id);
 

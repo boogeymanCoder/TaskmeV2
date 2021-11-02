@@ -31,9 +31,18 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO find by employer
+router.get("/employer/:employer", async (req, res) => {
+  const tasks = await Task.find({ employer: req.params.employer });
 
-router.get("/:id", async (req, res) => {
+  if (tasks.length <= 0) {
+    console.log(TaskNotFoundError);
+    return res.status(404).json(TaskNotFoundError);
+  }
+
+  res.json(tasks);
+});
+
+router.get("/id/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
 
   if (task === null) {

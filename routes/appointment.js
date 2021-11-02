@@ -4,7 +4,6 @@ const Appointment = require("../models/appointment");
 const AppointmentNotFoundError = require("./error").AppointmentNotFoundError;
 
 router.post("/", async (req, res) => {
-  // TODO check conflict
   const appointment = new Appointment({
     owner: req.body.owner,
     public: req.body.public,
@@ -23,7 +22,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// TODO find by owner
 router.get("/id/:id", async (req, res) => {
   const appointment = await Appointment.findById(req.params.id);
 
@@ -47,6 +45,7 @@ router.get("/owner/:owner", async (req, res) => {
 });
 
 router.put("/:id/schedules", async (req, res) => {
+  // TODO check conflict
   const appointment = await Appointment.findById(req.params.id);
 
   if (appointment === null) {
