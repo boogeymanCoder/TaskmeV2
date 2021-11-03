@@ -12,7 +12,16 @@ const apiRouter = require("./routes/api");
 mongoose.connect(process.env.DATABASE_URL);
 
 app.use(express.json());
+
+// Have Node serve the files for our built React app
+app.use(express.static(__dirname + "/client/build"));
+
 app.use("/api", apiRouter);
+
+// All other GET requests not handled before will return our React app
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 app.listen(process.env.PORT, () =>
   console.log("Listening at port", process.env.PORT)
