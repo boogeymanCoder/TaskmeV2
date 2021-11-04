@@ -6,6 +6,7 @@ const RateNotFoundError = require("./error").RateNotFoundError;
 router.post("/", async (req, res) => {
   const rate = new Rate({
     rate: req.body.rate,
+    review: req.body.review,
     from: req.body.from,
     to: req.body.to,
   });
@@ -42,6 +43,7 @@ router.patch("/:id", async (req, res) => {
   }
 
   rate.rate = req.body.rate ? req.body.rate : rate.rate;
+  rate.review = req.body.review ? req.body.review : rate.review;
   rate.from = req.body.from ? req.body.from : rate.from;
   rate.to = req.body.to ? req.body.to : rate.to;
 

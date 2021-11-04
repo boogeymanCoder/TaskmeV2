@@ -6,6 +6,10 @@ const rateSchema = new Schema({
     type: Number,
     required: true,
   },
+  review: {
+    type: String,
+    required: true,
+  },
   from: {
     type: Schema.Types.ObjectId,
     required: true,
