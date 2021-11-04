@@ -42,6 +42,17 @@ router.get("/id/:id", async (req, res) => {
   res.json(account);
 });
 
+router.get("/email/:email", async (req, res) => {
+  const account = await Account.findOne({ email: req.params.email });
+
+  if (account === null) {
+    console.log(AccountNotFoundError);
+    return res.status(404).send(AccountNotFoundError);
+  }
+
+  res.json(account);
+});
+
 router.get("/username/:username", async (req, res) => {
   const account = await Account.findOne({ username: req.params.username });
 
