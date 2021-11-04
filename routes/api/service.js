@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 
   if (service == null) {
     console.log("Service Not Found");
-    res.status(404).json(ServiceNotFoundError);
+    return res.status(404).json(ServiceNotFoundError);
   }
 
   res.json(await service.populate(["owner"]));
@@ -43,7 +43,7 @@ router.patch("/:id", async (req, res) => {
 
   if (service == null) {
     console.log("Service Not Found");
-    res.status(404).json(ServiceNotFoundError);
+    return res.status(404).json(ServiceNotFoundError);
   }
 
   service.owner = req.body.owner ? req.body.owner : service.owner;
@@ -70,7 +70,7 @@ router.delete("/:id", async (req, res) => {
 
   if (service == null) {
     console.log("Service Not Found");
-    res.status(404).json(ServiceNotFoundError);
+    return res.status(404).json(ServiceNotFoundError);
   }
 
   await Service.findByIdAndDelete(req.params.id)
