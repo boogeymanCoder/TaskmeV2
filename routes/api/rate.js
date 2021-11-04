@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Rate = require("../models/rate");
+const Rate = require("../../models/rate");
 const RateNotFoundError = require("./error").RateNotFoundError;
 
 router.post("/", async (req, res) => {

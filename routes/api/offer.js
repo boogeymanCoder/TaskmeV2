@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Offer = require("../models/offer");
+const Offer = require("../../models/offer");
 const DuplicateOfferError = require("./error").DuplicateOfferError;
 const OfferNotFoundError = require("./error").OfferNotFoundError;
 

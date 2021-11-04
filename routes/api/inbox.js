@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Inbox = require("../models/inbox");
+const Inbox = require("../../models/inbox");
 const InboxNotFoundError = require("./error").InboxNotFoundError;
 
 // TODO remove inbox

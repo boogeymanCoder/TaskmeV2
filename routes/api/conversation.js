@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Conversation = require("../models/conversation");
+const Conversation = require("../../models/conversation");
 const ConversationNotFoundError = require("./error").ConversationNotFoundError;
 
 // TODO add api authorization all routes

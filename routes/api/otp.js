@@ -1,6 +1,6 @@
 const express = require("express");
-const verificationOtp = require("../models/otp").verificationOtp;
-const recoveryOtp = require("../models/otp").recoveryOtp;
+const verificationOtp = require("../../models/otp").verificationOtp;
+const recoveryOtp = require("../../models/otp").recoveryOtp;
 const OtpNotFoundError = require("./error").OtpNotFoundError;
 
 function otpRouter(Otp) {

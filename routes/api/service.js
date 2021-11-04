@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Service = require("../models/service");
+const Service = require("../../models/service");
 const ServiceNotFoundError = require("./error").ServiceNotFoundError;
 
 router.post("/", async (req, res) => {
@@ -85,3 +85,4 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+// FIXME return on 404

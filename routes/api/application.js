@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Application = require("../models/application");
+const Application = require("../../models/application");
 const ApplicationNotFoundError = require("./error").ApplicationNotFoundError;
 
 router.post("/", async (req, res) => {

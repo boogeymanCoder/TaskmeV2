@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const Account = require("../models/account");
+const Account = require("../../models/account");
 const AccountNotFoundError = require("./error").AccountNotFoundError;
-const VerificationOtp = require("../models/otp").verificationOtp;
-const RecoveryOtp = require("../models/otp").recoveryOtp;
-const account = require("../models/account");
-const { verificationOtp } = require("../models/otp");
+const VerificationOtp = require("../../models/otp").verificationOtp;
+const RecoveryOtp = require("../../models/otp").recoveryOtp;
+const account = require("../../models/account");
+const { verificationOtp } = require("../../models/otp");
 
 router.post("/", async (req, res) => {
   const account = new Account({
