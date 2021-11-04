@@ -64,6 +64,25 @@ router.get("/username/:username", async (req, res) => {
   res.json(account);
 });
 
+router.get("/validate/username/:username", async (req, res) => {
+  const account = await Account.findOne({ username: req.params.username });
+
+  if (account === null) {
+    return res.send(true);
+  }
+
+  res.send(false);
+});
+
+router.get("/validate/email/:email", async (req, res) => {
+  const account = await Account.findOne({ email: req.params.email });
+
+  if (account === null) {
+    return res.send(true);
+  }
+
+  res.send(false);
+});
 // TODO add api authentication
 // TODO add api authorization
 router.patch("/:id", async (req, res) => {
