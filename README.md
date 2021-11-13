@@ -1,9 +1,9 @@
-#TaskmeV2
-Requirements:
-  Mongodb Server
-  Node.js and npm
-To run on local:
-  clone repository
-  cd to project directory
-  run "npm install" to install dependencies
-  run "npm run devStart" to run on local
+#TaskmeV2 <br />
+Requirements: <br />
+  Mongodb Server <br />
+  Node.js and npm <br />
+To run on local: <br />
+  clone repository <br />
+  cd to project directory <br />
+  run "npm install" to install dependencies <br />
+  run "npm run devStart" to run on local <br />
