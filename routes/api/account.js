@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 const Account = require("../../models/account");
 const AccountNotFoundError = require("./error").AccountNotFoundError;
 const VerificationOtp = require("../../models/otp").verificationOtp;
@@ -29,6 +30,30 @@ router.post("/", async (req, res) => {
       console.log("Account Not Created, Cause:", err);
       res.status(400).json(err);
     });
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.send({ message: "Successfully Logged Out" });
+});
+
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    console.log("Called login callback");
+    if (err) return next(err);
+    if (info) return res.json(info);
+    req.login(user, (err) => {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+      res.redirect("/");
+    });
+  })(req, res, next);
+});
+
+router.get("/", (req, res) => {
+  res.json(req.user);
 });
 
 router.get("/id/:id", async (req, res) => {

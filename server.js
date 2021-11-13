@@ -5,7 +5,10 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
 
+const initializePassport = require("./routes/passport-config");
 const apiRouter = require("./routes/api");
 
 // set up mongodb connection
@@ -15,6 +18,16 @@ app.use(express.json());
 
 // Have Node serve the files for our built React app
 app.use(express.static(__dirname + "/client/build"));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+initializePassport(passport);
 
 app.use("/api", apiRouter);
 
