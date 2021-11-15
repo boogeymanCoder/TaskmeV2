@@ -33,7 +33,7 @@ app.use("/api", apiRouter);
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/client/build/index.html");
+  res.sendFile(__dirname + "../client/build/index.html");
 });
 
 app.listen(process.env.PORT, () =>

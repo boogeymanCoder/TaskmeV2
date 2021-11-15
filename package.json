@@ -4,11 +4,10 @@
   "description": "One time part-time job hiring site",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node server/server.js",
     "build": "cd client && npm install && npm run build",
-    "devStart": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
-    "devBuild": "concurrently \"nodemon server.js\" \"cd client && npm install && npm run build\""
+    "devStart": "concurrently \"nodemon server/server.js\" \"cd client && npm start\"",
+    "devBuild": "concurrently \"nodemon server/server.js\" \"cd client && npm install && npm run build\""
   },
   "keywords": [
     "taskme",
