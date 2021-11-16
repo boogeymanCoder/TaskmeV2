@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNonAuthCheck } from "../hooks/auth";
-import { useNavigate } from "react-router";
 
 export default function Main() {
-  const navigate = useNavigate();
   const nonAuthCheck = useNonAuthCheck("/login");
   const [account, setAccount] = useState();
   const [username, setUsername] = useState("");
@@ -18,9 +16,12 @@ export default function Main() {
   const [contact, setContact] = useState("");
   const [gender, setGender] = useState("");
 
+  // eslint-disable-next-line
+  useEffect(nonAuthCheck, []);
+
   useEffect(() => {
     axios
-      .get("/api/account")
+      .get("http://localhost:3001/api/account", { withCredentials: true })
       .then((res) => {
         setAccount(res.data);
       })
@@ -48,9 +49,6 @@ export default function Main() {
   console.log("contact:" + contact);
   console.log("gender:" + gender);
 
-  // eslint-disable-next-line
-  useEffect(nonAuthCheck, []);
-
   function passwordChange(e) {
     setPassword(e.target.value);
     if (
@@ -74,7 +72,7 @@ export default function Main() {
     if (e.target.value === "") return;
     if (e.target.value === account.email) return setEmailColor("green");
     axios
-      .get(`/api/account/validate/email/${e.target.value}`)
+      .get(`http://localhost:3001/api/account/validate/email/${e.target.value}`)
       .then((res) => {
         setEmailColor(res.data ? "green" : "red");
       })
@@ -86,14 +84,18 @@ export default function Main() {
   function update(e) {
     e.preventDefault();
     axios
-      .patch(`/api/account/${account._id}`, {
-        password: password ? password : account.password,
-        email: email,
-        fullname: fullname,
-        address: address,
-        contact: contact,
-        gender: gender,
-      })
+      .patch(
+        `http://localhost:3001/api/account/${account._id}`,
+        {
+          password: password ? password : null,
+          email: email,
+          fullname: fullname,
+          address: address,
+          contact: contact,
+          gender: gender,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log("Updated!");
         // navigate("/login");
@@ -106,7 +108,9 @@ export default function Main() {
   function logout() {
     if (window.confirm("Are you sure you want to logout?"))
       axios
-        .get("/api/account/logout")
+        .get("http://localhost:3001/api/account/logout", {
+          withCredentials: true,
+        })
         .then((res) => {
           if (res.data.message) {
             nonAuthCheck();

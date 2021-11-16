@@ -25,8 +25,10 @@ function initializePassport(passport) {
   );
 
   passport.serializeUser((user, done) => done(null, user._id));
-  passport.deserializeUser(async (id, done) => {
-    return done(null, await Account.findById(id));
+  passport.deserializeUser((id, done) => {
+    Account.findOne({ _id: id }, (err, user) => {
+      done(err, user);
+    });
   });
 }
 

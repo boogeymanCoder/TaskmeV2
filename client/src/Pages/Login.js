@@ -13,19 +13,26 @@ export default function Login() {
     console.log("Username: " + username);
     console.log("Password: " + password);
     e.preventDefault();
+
     axios
-      .post("/api/account/login/", {
-        username: username,
-        password: password,
-      })
+      .post(
+        "http://localhost:3001/api/account/login",
+        {
+          username: username,
+          password: password,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         if (res.data.message) {
           return alert(res.data.message);
         }
+        console.log("Received after login:", res);
         axios
-          .get("/api/account")
+          .get("http://localhost:3001/api/account", { withCredentials: true })
           .then((res) => {
             console.log(res);
+
             loginAuthCheck();
           })
           .catch((err) => {
@@ -37,7 +44,7 @@ export default function Login() {
       });
   }
 
-  // eslint-disable-next-line
+  // // eslint-disable-next-line
   useEffect(loginAuthCheck, []);
 
   return (

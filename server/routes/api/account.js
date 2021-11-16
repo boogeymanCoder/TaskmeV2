@@ -2,12 +2,19 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const passportLocal = require("passport-local").Strategy;
 const Account = require("../../models/account");
 const AccountNotFoundError = require("./error").AccountNotFoundError;
 const VerificationOtp = require("../../models/otp").verificationOtp;
 const RecoveryOtp = require("../../models/otp").recoveryOtp;
 const account = require("../../models/account");
 const { verificationOtp } = require("../../models/otp");
+
+router.get("/", (req, res) => {
+  console.log("req.session:", req.session);
+  console.log("req.user:", req.user);
+  res.json(req.user);
+});
 
 router.post("/", async (req, res) => {
   const account = new Account({
@@ -47,14 +54,21 @@ router.post("/login", (req, res, next) => {
         console.log(err);
         return next(err);
       }
-      res.redirect("/");
+      console.log("req.session:", req.session);
+      console.log("req.user after login: ", req.user);
+      console.log("user to be sent:", user);
+      return res.json(user);
     });
   })(req, res, next);
 });
 
-router.get("/", (req, res) => {
-  res.json(req.user);
-});
+// router.post(
+//   "/login",
+//   passport.authenticate("local", {
+//     failureRedirect: "/login",
+//     successRedirect: "http://localhost:3000/",
+//   })
+// );
 
 router.get("/id/:id", async (req, res) => {
   const account = await Account.findById(req.params.id);
@@ -119,7 +133,9 @@ router.patch("/:id", async (req, res) => {
   }
 
   account.username = req.body.username ? req.body.username : account.username;
-  account.password = req.body.password ? req.body.password : account.password;
+  account.password = req.body.password
+    ? await bcrypt.hash(req.body.password, 10)
+    : account.password;
   account.email = req.body.email ? req.body.email : account.email;
   account.fullname = req.body.fullname ? req.body.fullname : account.fullname;
   account.address = req.body.address ? req.body.address : account.address;
