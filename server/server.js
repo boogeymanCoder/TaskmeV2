@@ -7,7 +7,7 @@ const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
-const cors = require("cors");
+// const cors = require("cors");
 
 const initializePassport = require("./routes/passport-config");
 const apiRouter = require("./routes/api");
@@ -15,13 +15,13 @@ const apiRouter = require("./routes/api");
 // set up mongodb connection
 mongoose.connect(process.env.DATABASE_URL);
 
-app.use(
-  cors({
-    origin: "https://taskme-buk.herokuapp.com",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://taskme-buk.herokuapp.com",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -6,7 +6,7 @@ export function useAuthCheck(destination, alternative) {
 
   return () => {
     axios
-      .get("http://localhost:3001/api/account/", { withCredentials: true })
+      .get("/api/account/")
       .then((res) => {
         console.log("res:", res);
         if (res.data) navigate(destination);
@@ -22,7 +22,7 @@ export function useNonAuthCheck(destination, alternative) {
   const navigate = useNavigate();
   return () => {
     axios
-      .get("http://localhost:3001/api/account", { withCredentials: true })
+      .get("/api/account")
       .then((res) => {
         if (!res.data) navigate(destination);
         else if (alternative) navigate(alternative);

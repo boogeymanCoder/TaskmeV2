@@ -21,9 +21,7 @@ export default function Register() {
     setUsername(e.target.value);
     if (e.target.value === "") return;
     axios
-      .get(
-        `http://localhost:3001/api/account/validate/username/${e.target.value}`
-      )
+      .get(`/api/account/validate/username/${e.target.value}`)
       .then((res) => {
         setUsrColor(res.data ? "green" : "red");
       })
@@ -54,7 +52,7 @@ export default function Register() {
     setEmail(e.target.value);
     if (e.target.value === "") return;
     axios
-      .get(`http://localhost:3001/api/account/validate/email/${e.target.value}`)
+      .get(`/api/account/validate/email/${e.target.value}`)
       .then((res) => {
         setEmailColor(res.data ? "green" : "red");
       })
@@ -66,7 +64,7 @@ export default function Register() {
   function register(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/api/account", {
+      .post("/api/account", {
         username: username,
         password: password,
         email: email,

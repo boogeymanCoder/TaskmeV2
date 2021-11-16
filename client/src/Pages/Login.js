@@ -15,21 +15,17 @@ export default function Login() {
     e.preventDefault();
 
     axios
-      .post(
-        "http://localhost:3001/api/account/login",
-        {
-          username: username,
-          password: password,
-        },
-        { withCredentials: true }
-      )
+      .post("/api/account/login", {
+        username: username,
+        password: password,
+      })
       .then((res) => {
         if (res.data.message) {
           return alert(res.data.message);
         }
         console.log("Received after login:", res);
         axios
-          .get("http://localhost:3001/api/account", { withCredentials: true })
+          .get("/api/account")
           .then((res) => {
             console.log(res);
 
