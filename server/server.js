@@ -17,7 +17,7 @@ mongoose.connect(process.env.DATABASE_URL);
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://taskme-buk.herokuapp.com"],
+    origin: "https://taskme-buk.herokuapp.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
