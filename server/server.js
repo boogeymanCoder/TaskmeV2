@@ -22,6 +22,15 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(
+  cors({
+    origin: "https://taskme-buk.herokuapp.com",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
