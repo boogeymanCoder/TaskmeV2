@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Have Node serve the files for our built React app
-app.use(express.static(__dirname + "/client/build"));
+app.use(express.static(__dirname + "/../client/build"));
 app.use(
   session({
     secret: process.env.SECRET,
